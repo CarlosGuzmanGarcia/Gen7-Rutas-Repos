@@ -119,7 +119,7 @@ List<Chofer> choferes =  (List<Chofer>) request.getAttribute("choferes");
                                         <a href="<%=request.getContextPath()%>/choferes/detalle?id=<%=c.getId()%>" class="btn btn-success">Detalle</a>
                                     </td>
                                     <td>
-                                        <a href="<%=request.getContextPath()%>/editar/detalle?id=<%=c.getId()%>" class="btn btn-primary">Editar</a>
+                                        <a href="<%=request.getContextPath()%>/choferes/editar?id=<%=c.getId()%>" class="btn btn-primary">Editar</a>
                                     </td>
                                     <td>
                                         <a href="<%=request.getContextPath()%>/choferes/eliminar?id=<%=c.getId()%>" class="btn btn-danger">Eliminar</a>
