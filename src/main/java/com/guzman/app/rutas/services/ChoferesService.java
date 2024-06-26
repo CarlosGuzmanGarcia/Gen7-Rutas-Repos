@@ -28,7 +28,11 @@ public class ChoferesService implements IServices<Chofer>{
 
     @Override
     public Optional<Chofer> getById(Long id) {
-        return Optional.empty();
+        try {
+            return Optional.ofNullable(choferesRepo.getById(id));
+        }catch (SQLException e) {
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
     }
 
     @Override
