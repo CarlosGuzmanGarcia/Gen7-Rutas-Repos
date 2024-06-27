@@ -1,6 +1,7 @@
 package com.guzman.app.rutas.repositories;
 
 import com.guzman.app.rutas.models.Camion;
+import com.guzman.app.rutas.models.Chofer;
 import com.guzman.app.rutas.models.enums.Marcas;
 import com.guzman.app.rutas.models.enums.Tipos;
 
@@ -35,7 +36,16 @@ public class CamionesRepository implements IRepository<Camion> {
 
     @Override
     public Camion getById(Long id) throws SQLException {
-        return null;
+        Camion camion = null;
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM CAMIONES WHERE ID_CAMION = ?")){
+            stmt.setLong(1, id);
+            try(ResultSet rs = stmt.executeQuery()){
+                if (rs.next()){
+                    camion = this.getCamion(rs);
+                }
+            }
+        }
+        return camion;
     }
 
     @Override
@@ -78,7 +88,11 @@ public class CamionesRepository implements IRepository<Camion> {
 
     @Override
     public void eliminar(Long id) throws SQLException {
-
+        String sql = "delete from camiones where ID_CAMION =?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setLong(1,id);
+            stmt.executeUpdate();
+        }
     }
 
     private Camion getCamion(ResultSet rs) throws SQLException {
