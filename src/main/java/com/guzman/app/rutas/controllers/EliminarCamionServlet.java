@@ -32,8 +32,12 @@ public class EliminarCamionServlet extends HttpServlet {
         if(id > 0 ){
             Optional<Camion> o = service.getById(id);
             if(o.isPresent()){
-                service.eliminar(id);
-                resp.sendRedirect(req.getContextPath()+ "/camiones/listar");
+                try {
+                    service.eliminar(id);
+                    resp.sendRedirect(req.getContextPath() + "/camiones/listar");
+                }catch (Exception e){
+                    resp.sendRedirect(req.getContextPath()+ "/camiones/listar?error=foreign_key_violation");
+                }
             }
             else
             {

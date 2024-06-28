@@ -29,8 +29,16 @@ public class EliminarChoferServlet extends HttpServlet {
         if(id > 0 ){
             Optional<Chofer> o = service.getById(id);
             if(o.isPresent()){
-               service.eliminar(id);
-               resp.sendRedirect(req.getContextPath()+ "/choferes/listar");
+                try{
+                    service.eliminar(id);
+                    resp.sendRedirect(req.getContextPath()+ "/choferes/listar");
+                }catch (Exception e){
+
+                    resp.sendRedirect(req.getContextPath()+ "/choferes/listar?error=foreign_key_violation");
+
+                }
+
+
             }
             else
             {

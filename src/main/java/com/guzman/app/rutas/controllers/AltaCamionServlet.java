@@ -54,9 +54,15 @@ public class AltaCamionServlet extends HttpServlet {
         Marcas marca = Marcas.valueOf(marcaStr);
         Integer capacidad = Integer.parseInt(req.getParameter("capacidad"));
         Double kilometraje = Double.parseDouble(req.getParameter("kilometraje"));
-
-        String disponibilidadStr = req.getParameter("disponibilidad");
-        Boolean disponibilidad = disponibilidadStr != null && disponibilidadStr.equalsIgnoreCase("true");
+        String checkbox[]; // []
+        checkbox = req.getParameterValues("disponibilidad");
+        Boolean habilitar;
+        if (checkbox != null){
+            habilitar =true;
+        }else {
+            habilitar = false;
+        }
+        Boolean disponibilidad = habilitar;
 
         Map<String, String> errores = new HashMap<>();
 

@@ -19,7 +19,17 @@ List<Camion> camiones =  (List<Camion>) request.getAttribute("camiones");
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('error')) {
+                    const error = urlParams.get('error');
+                    if (error === 'foreign_key_violation') {
+                        alert("No se puede eliminar el camion porque está relacionado con otros registros.");
+                    }
+                }
+            });
+        </script>
 </head>
 <body>
 

@@ -90,8 +90,6 @@ public class ChoferesRepository implements IRepository<Chofer> {
         }
     }
 
-    //mapear/trsanformar un renglon/fila/reegisttro/row en un objeto de tipo chofer
-
     private Chofer getChofer(ResultSet rs) throws SQLException {
         Chofer a = new Chofer();
         a.setId(rs.getLong("ID_CHOFER"));

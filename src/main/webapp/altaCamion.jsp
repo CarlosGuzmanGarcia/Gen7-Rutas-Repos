@@ -164,6 +164,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="disponibilidad">Disponibilidad</label>
+                        <input type="checkbox" name="disponibilidad" id="disponibilidad" class="form-check-input"
+                            <%= request.getParameter("disponibilidad") != null ? "checked" : "" %>>
+                    </div>
+
+                    <div class="form-group">
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
@@ -173,3 +179,4 @@
 </body>
 
 </html>
+

@@ -13,6 +13,16 @@ List<Camion> camiones =  (List<Camion>) request.getAttribute("camiones");
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style>
+            #loading {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1000;
+            }
+        </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -213,6 +223,11 @@ List<Camion> camiones =  (List<Camion>) request.getAttribute("camiones");
                                 <label for="">CP</label>
                                 <input type="text" name="CP" id="CP" class="form-control">
                             </div>
+
+                            <div class="form-group" id="loading" style="display: none;">
+                                <img src="<%= request.getContextPath() %>/carrga.gif"   alt="Cargando...">
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -258,7 +273,7 @@ List<Camion> camiones =  (List<Camion>) request.getAttribute("camiones");
             }else{
                 direccion = $("#destino").val();
             }
-            $("#txtEsOD").val("fuente");
+            $("#txtEsOD").val(fuente);
             if(direccion != "")
             {
 
@@ -319,6 +334,31 @@ List<Camion> camiones =  (List<Camion>) request.getAttribute("camiones");
                 $("#myModal").val("hide");
             }
         }
+
+        function btnGuardarDir() {
+            // Mostrar el gif de carga
+            $("#loading").show();
+
+            $.ajax({
+                type: 'POST',
+                url: "http://localhost:8080/Gen7-Api/api/direcciones",
+                data: $("#formDireccion").serialize(), // Serializar el formulario
+                success: function(resp) {
+                    console.log(resp);
+                    $('#myModal').modal('hide');
+                    // Aquí manejas la respuesta exitosa y actualizas la interfaz según sea necesario
+                },
+                error: function() {
+                    alert("Ocurrió un error al guardar la dirección");
+                },
+                complete: function() {
+                    // Ocultar el gif de carga
+                    $("#loading").hide();
+                }
+            });
+        }
     </script>
+
+
 </body>
 </html>
